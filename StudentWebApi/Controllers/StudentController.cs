@@ -98,11 +98,31 @@ namespace StudentWebApi.Controllers
         }
 
         // Filters records by name
-        [HttpGet("list")]
+        [HttpGet("filter")]
         public ActionResult<List<Student>> GetByName([FromQuery] string Name)
         {
             var filteredStudents = StudentList.FindAll(student => student.Name.Contains(Name));
             return Ok(filteredStudents);
+        }
+
+        [HttpGet("orderby/{Column}")]
+        public ActionResult SortStudents(string Column)
+        {
+            var studentList = StudentList;
+            if (Column == "Id")
+            {
+                studentList = StudentList.OrderBy(x => x.Id).ToList<Student>();
+                return Ok(studentList);
+            }
+            else if (Column == "Name")
+            {
+                studentList = StudentList.OrderBy(x => x.Name).ToList<Student>();
+                return Ok(studentList);
+            }
+            else
+            {
+                return BadRequest("Yanlış sıralama tercihleri yapılıdı.");
+            }
         }
     }
 }
