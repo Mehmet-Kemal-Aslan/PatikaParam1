@@ -1,9 +1,16 @@
 using StudentWebApi.MiddleWare;
 using StudentWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DbStudent");
+builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<StudentDbContext>(options=>
+options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<StudentDbContext>(options =>
+//options.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,6 +34,8 @@ app.UseAuthorization();
 
 // A custom middleware is designed.
 app.UseCustomMiddleware();
+// An exception middleware is designed.
+app.UseCustomExceptionMiddleware();
 // simple middlewares
 app.Use(async (context, next) =>
 { Console.WriteLine("actiona girildi.");
@@ -39,7 +48,7 @@ internalApp.Run(async context =>
     await context.Response.WriteAsync("middleware response.");
 }));
 // action at get requests
-app.MapWhen(x => x.Request.Method == "GET", internalApp =>
+app.MapWhen(x => x.Request.Method == "PUT", internalApp =>
 {
     internalApp.Run(async context =>
     {
@@ -47,6 +56,7 @@ app.MapWhen(x => x.Request.Method == "GET", internalApp =>
         await context.Response.WriteAsync("MapWhen middleware");
     });
 });
+
 
 app.MapControllers();
 

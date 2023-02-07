@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace StudentWebApi.MiddleWare
 {
@@ -14,10 +17,34 @@ namespace StudentWebApi.MiddleWare
             _next = next;
         }
 
-        public Task Invoke(HttpContext httpContext)
+        public async Task Invoke(HttpContext httpContext)
         {
+            var watch = Stopwatch.StartNew();
+            try
+            {
+                string message = "[Request] HTTP " + httpContext.Request.Method + " - " + httpContext.Request.Path;
+                Console.WriteLine(message);
+                await _next(httpContext);
+                watch.Stop();
+                message = "[Response] HTTP " + httpContext.Request.Method + " - " + httpContext.Request.Path + " responded " + httpContext.Response.StatusCode + " in " + watch.ElapsedMilliseconds + "ms";
+                Console.WriteLine(message);
+            }
+            catch (Exception ex)
+            {
+                watch.Stop();
+                await HandleException(httpContext, ex, watch);
+            }
+        }
 
-            return _next(httpContext);
+        private Task HandleException(HttpContext httpContext, Exception ex, Stopwatch watch)
+        {
+            string message = "[Error] HTTP " + httpContext.Request.Method + " - " + httpContext.Response.StatusCode + " Error Message " + ex.Message + " in " + watch.ElapsedMilliseconds + " ms.";
+            Console.WriteLine(message);
+            httpContext.Response.ContentType = "application/json";
+            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            var result = JsonConvert.SerializeObject(new { error = ex.Message }, Formatting.None);
+            return httpContext.Response.WriteAsync(result);
         }
     }
 
