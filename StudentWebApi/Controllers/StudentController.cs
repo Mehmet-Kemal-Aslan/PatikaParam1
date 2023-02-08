@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentWebApi.Models;
+using StudentWebApi.Operations;
+using StudentWebApi.Operations.CreateStudents;
+using static StudentWebApi.Operations.CreateStudents.CreateStudentsCommand;
 
 namespace StudentWebApi.Controllers
 {
@@ -34,12 +37,20 @@ namespace StudentWebApi.Controllers
             }
         };
 
+        private readonly StudentDbContext _context;
+
+        public StudentController(StudentDbContext context)
+        {
+            _context = context;
+        }
+
         // Gets all records
         [HttpGet]
-        public List<Student> GetStundentList()
+        public IActionResult GetStundentList()
         {
-            var studentList = StudentList.OrderBy(x => x.Id).ToList<Student>();
-            return studentList;
+            GetStudentsQuery query = new GetStudentsQuery(_context);
+            var result = query.Handle();
+            return Ok(result);
         }
 
         // Gets one record by id
@@ -52,12 +63,18 @@ namespace StudentWebApi.Controllers
 
         // posts a new record -- [FromBody]
         [HttpPost]
-        public IActionResult AddStudent([FromBody] Student newStudent)
+        public IActionResult AddStudent([FromBody] CreateStudentModel newStudent)
         {
-            var student = StudentList.SingleOrDefault(student => student.Id == newStudent.Id);
-            if (student != null)
-                return BadRequest();
-            StudentList.Add(newStudent);
+            CreateStudentsCommand command = new CreateStudentsCommand(_context);
+            try
+            {
+                command.Model = newStudent;
+                command.Handle();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return Ok();
         }
 
