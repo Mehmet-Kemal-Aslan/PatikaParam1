@@ -13,6 +13,7 @@ namespace StudentWebApi.Operations.GetStudentDetail
             _dbContext = dbContext;
         }
 
+        //An handler to see a student
         public StudentDetailViewModel Handle()
         {
             var student = _dbContext.Students.Where(student => student.Id == StudentId).SingleOrDefault();

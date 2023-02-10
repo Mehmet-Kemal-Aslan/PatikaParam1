@@ -12,6 +12,7 @@ namespace StudentWebApi.Operations
             _dbContext = dbContext;
         }
 
+        // An handler to see all students
         public List<StudentViewModel>Handle()
         {
             var studentList = _dbContext.Students.OrderBy(x => x.Id).ToList<Student>();

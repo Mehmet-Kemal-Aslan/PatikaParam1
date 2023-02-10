@@ -11,6 +11,7 @@ namespace StudentWebApi.Operations.CreateStudents
             _dbContext = dbContext;
         }
 
+        // An Handler to create new student
         public void Handle()
         {
             var student = _dbContext.Students.SingleOrDefault(student => student.Name == Model.Name);

@@ -14,6 +14,7 @@ namespace StudentWebApi.Operations.UpdateStudent
             _dbContext = dbContext;
         }
 
+        // An handler to update a student's grade and note.
         public StudentUpdateViewModel Handle()
         {
             var student = _dbContext.Students.Where(student => student.Id == StudentId).SingleOrDefault();

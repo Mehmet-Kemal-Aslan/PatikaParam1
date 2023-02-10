@@ -12,7 +12,7 @@ namespace StudentWebApi.Operations.DeleteStudent
         {
             _dbContext = dbContext;
         }
-
+        // An handler to delete student
         public void Handle()
         {
             var student = _dbContext.Students.Where(student => student.Id == StudentId).SingleOrDefault();
