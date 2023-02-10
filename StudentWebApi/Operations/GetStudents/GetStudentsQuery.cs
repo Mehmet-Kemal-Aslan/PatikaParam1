@@ -23,6 +23,7 @@ namespace StudentWebApi.Operations
                     Name = student.Name,
                     Surname = student.Surname,
                     Grade = student.Grade,
+                    Note = student.Note,
                 });
             }
             return vm;
@@ -34,6 +35,7 @@ namespace StudentWebApi.Operations
             public string Name { get; set; }
             public string Surname { get; set; }
             public int Grade { get; set; }
+            public string Note { get; set; }
         }
     }
 }

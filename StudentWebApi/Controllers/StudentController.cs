@@ -3,7 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using StudentWebApi.Models;
 using StudentWebApi.Operations;
 using StudentWebApi.Operations.CreateStudents;
+using StudentWebApi.Operations.DeleteStudent;
+using StudentWebApi.Operations.GetStudentDetail;
+using StudentWebApi.Operations.UpdateStudent;
 using static StudentWebApi.Operations.CreateStudents.CreateStudentsCommand;
+using static StudentWebApi.Operations.GetStudentDetail.GetStudentDetailQuery;
+using static StudentWebApi.Operations.UpdateStudent.UpdateStudentCommand;
 
 namespace StudentWebApi.Controllers
 {
@@ -55,10 +60,20 @@ namespace StudentWebApi.Controllers
 
         // Gets one record by id
         [HttpGet("{id}")]
-        public Student GetStundentbyId(int id)
+        public IActionResult GetStundentbyId(int id)
         {
-            var student = StudentList.Where(student => student.Id == id).SingleOrDefault();
-            return student;
+            StudentDetailViewModel result;
+            try
+            {
+                GetStudentDetailQuery query = new GetStudentDetailQuery(_context);
+                query.StudentId = id;
+                result = query.Handle();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(result);
         }
 
         // posts a new record -- [FromBody]
@@ -80,15 +95,20 @@ namespace StudentWebApi.Controllers
 
         // updates a record by id -- [FromBody]
         [HttpPut("{id}")]
-        public IActionResult UpdateStudent(int id, [FromBody] Student updatedStudent)
+        public IActionResult UpdateStudent(int id, [FromBody] StudentUpdateViewModel updatedStudent)
         {
-            var student = StudentList.SingleOrDefault(student => student.Id == id);
-            if (student == null)
-                return BadRequest();
-            student.Name = updatedStudent.Name != default ? updatedStudent.Name : student.Name;
-            student.Surname = updatedStudent.Surname != default ? updatedStudent.Surname : student.Surname;
-            student.Grade = Convert.ToInt32(updatedStudent.Grade);
-            student.Note = updatedStudent.Note != default ? updatedStudent.Note : student.Note;
+            try
+            {
+                UpdateStudentCommand command = new UpdateStudentCommand(_context);
+                command.StudentId = id;
+                command.Model = updatedStudent;
+                command.Handle();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
             return Ok();
         }
 
@@ -96,10 +116,16 @@ namespace StudentWebApi.Controllers
         [HttpDelete]
         public IActionResult DeleteStudent([FromQuery] int id)
         {
-            var student = StudentList.SingleOrDefault(student => student.Id == id);
-            if (student == null)
-                return BadRequest();
-            StudentList.Remove(student);
+            try 
+            {
+                DeleteStudentCommand command = new DeleteStudentCommand(_context);
+                command.StudentId = id;
+                command.Handle();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return Ok();
         }
 

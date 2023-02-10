@@ -48,7 +48,7 @@ internalApp.Run(async context =>
     await context.Response.WriteAsync("middleware response.");
 }));
 // action at get requests
-app.MapWhen(x => x.Request.Method == "PUT", internalApp =>
+app.MapWhen(x => x.Request.Method == "PATCH", internalApp =>
 {
     internalApp.Run(async context =>
     {
