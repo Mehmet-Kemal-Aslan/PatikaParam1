@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentWebApi.Models;
 using StudentWebApi.Operations;
@@ -67,6 +69,8 @@ namespace StudentWebApi.Controllers
             {
                 GetStudentDetailQuery query = new GetStudentDetailQuery(_context);
                 query.StudentId = id;
+                GetStudentDetailQueryValidator validator = new GetStudentDetailQueryValidator();
+                validator.ValidateAndThrow(query);
                 result = query.Handle();
             }
             catch (Exception ex)
@@ -84,7 +88,17 @@ namespace StudentWebApi.Controllers
             try
             {
                 command.Model = newStudent;
+                CreateStudentCommandValidator validator = new CreateStudentCommandValidator();
+                ValidationResult result = validator.Validate(command);
+                validator.ValidateAndThrow(command);
                 command.Handle();
+                //if(!result.IsValid)
+                //    foreach(var item in result.Errors)
+                //    {
+                //        Console.WriteLine("Özellik " + item.PropertyName + " Hata mesajı " + item.ErrorMessage);
+                //    }
+                //else
+                //    command.Handle();
             }
             catch (Exception ex)
             {
@@ -102,6 +116,9 @@ namespace StudentWebApi.Controllers
                 UpdateStudentCommand command = new UpdateStudentCommand(_context);
                 command.StudentId = id;
                 command.Model = updatedStudent;
+                UpdateStudentCommandValidator validator = new UpdateStudentCommandValidator();
+                ValidationResult result = validator.Validate(command);
+                validator.ValidateAndThrow(command);
                 command.Handle();
             }
             catch(Exception ex)
@@ -120,6 +137,8 @@ namespace StudentWebApi.Controllers
             {
                 DeleteStudentCommand command = new DeleteStudentCommand(_context);
                 command.StudentId = id;
+                DeleteStudentCommandValidator validator = new DeleteStudentCommandValidator();
+                validator.ValidateAndThrow(command);
                 command.Handle();
             }
             catch(Exception ex)
