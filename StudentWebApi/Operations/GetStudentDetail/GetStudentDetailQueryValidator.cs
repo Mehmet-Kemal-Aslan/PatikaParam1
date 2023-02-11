@@ -2,6 +2,7 @@
 
 namespace StudentWebApi.Operations.GetStudentDetail
 {
+    // Validation for GetStudentDetailQuery
     public class GetStudentDetailQueryValidator : AbstractValidator<GetStudentDetailQuery>
     {
         public GetStudentDetailQueryValidator()
