@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Net;
 using Newtonsoft.Json;
+using StudentWebApi.Services;
 
 namespace StudentWebApi.MiddleWare
 {
@@ -11,10 +12,12 @@ namespace StudentWebApi.MiddleWare
     public class CustomExceptionMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILoggerService _loggerService;
 
-        public CustomExceptionMiddleware(RequestDelegate next)
+        public CustomExceptionMiddleware(RequestDelegate next, ILoggerService loggerService)
         {
             _next = next;
+            _loggerService = loggerService;
         }
 
         public async Task Invoke(HttpContext httpContext)
@@ -23,11 +26,11 @@ namespace StudentWebApi.MiddleWare
             try
             {
                 string message = "[Request] HTTP " + httpContext.Request.Method + " - " + httpContext.Request.Path;
-                Console.WriteLine(message);
+                _loggerService.Write(message);
                 await _next(httpContext);
                 watch.Stop();
                 message = "[Response] HTTP " + httpContext.Request.Method + " - " + httpContext.Request.Path + " responded " + httpContext.Response.StatusCode + " in " + watch.ElapsedMilliseconds + "ms";
-                Console.WriteLine(message);
+                _loggerService.Write(message);
             }
             catch (Exception ex)
             {
@@ -39,7 +42,7 @@ namespace StudentWebApi.MiddleWare
         private Task HandleException(HttpContext httpContext, Exception ex, Stopwatch watch)
         {
             string message = "[Error] HTTP " + httpContext.Request.Method + " - " + httpContext.Response.StatusCode + " Error Message " + ex.Message + " in " + watch.ElapsedMilliseconds + " ms.";
-            Console.WriteLine(message);
+            _loggerService.Write(message);
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 

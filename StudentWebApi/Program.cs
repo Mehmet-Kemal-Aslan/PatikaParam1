@@ -1,6 +1,7 @@
 using StudentWebApi.MiddleWare;
 using StudentWebApi.Models;
 using Microsoft.EntityFrameworkCore;
+using StudentWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +10,7 @@ var connectionString = builder.Configuration.GetConnectionString("DbStudent");
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<StudentDbContext>(options=>
 options.UseSqlServer(connectionString));
-//builder.Services.AddDbContext<StudentDbContext>(options =>
-//options.UseSqlServer(connectionString));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -18,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ILesson, LessonService>();
+builder.Services.AddSingleton<ILoggerService, ConsoleLogger>();
 
 var app = builder.Build();
 
