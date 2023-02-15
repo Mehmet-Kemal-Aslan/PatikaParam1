@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "7RlhMvNiD6MYgwwKF1wZEvnlHwyqRMNkv3Eb82An/JOHe6O9Os07IhPmOJnKXn5LSL3K4ZOTLd/0zkXiwGqrZw==",
+  "dgSpecHash": "59aKCu9GmA8RUFkvpjU+/Q6dadb202bylH3wXOzzmoP4YhoDl4kC7qQmJcAWpqPunpQ/QSLPYObg3cq4hfaa4A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mehmet Kemal\\source\\repos\\Param1\\StudentWebApi\\StudentWebApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\fluentvalidation\\11.4.0\\fluentvalidation.11.4.0.nupkg.sha512",
     "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\Mehmet Kemal\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.13\\microsoft.entityframeworkcore.6.0.13.nupkg.sha512",
