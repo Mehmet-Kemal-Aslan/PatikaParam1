@@ -2,9 +2,9 @@
 
 namespace StudentWebApi.Application.ProjectOperations.Queries.GetProjectDetail
 {
-    public class GetProjectDetailValidator : AbstractValidator<GetProjectDetailQuery>
+    public class GetProjectDetailQueryValidator : AbstractValidator<GetProjectDetailQuery>
     {
-        public GetProjectDetailValidator()
+        public GetProjectDetailQueryValidator()
         {
             RuleFor(query => query.QueryId).GreaterThan(0);
         }

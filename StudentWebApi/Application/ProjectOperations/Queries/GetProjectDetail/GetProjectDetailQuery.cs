@@ -17,14 +17,14 @@ namespace StudentWebApi.Application.ProjectOperations.Queries
 
         public ProjectDetailViewModel Handle()
         {
-            var project = _context.Projects.Where(p => p.IsActive && p.ProjectId == QueryId);
+            var project = _context.Projects.SingleOrDefault(p => p.IsActive && p.ProjectId == QueryId);
             if (project is null)
                 throw new InvalidOperationException("Proje bulunamadı.");
             return _mapper.Map<ProjectDetailViewModel>(project);
         }
         public class ProjectDetailViewModel
         {
-            public int Id { get; set; }
+            public int ProjectId { get; set; }
             public string Name { get; set; }
         }
     }

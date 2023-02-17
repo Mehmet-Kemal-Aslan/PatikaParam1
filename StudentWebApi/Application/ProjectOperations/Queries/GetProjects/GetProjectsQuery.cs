@@ -24,7 +24,7 @@ namespace StudentWebApi.Application.ProjectOperations.Queries
 
     public class ProjectViewModel
     {
-        public string Id { get; set; }
+        public int ProjectId { get; set; }
         public string Name { get; set; }
     }
 }

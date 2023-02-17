@@ -2,6 +2,9 @@ using StudentWebApi.MiddleWare;
 using StudentWebApi.Models;
 using Microsoft.EntityFrameworkCore;
 using StudentWebApi.Services;
+using AutoMapper;
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,8 @@ var connectionString = builder.Configuration.GetConnectionString("DbStudent");
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<StudentDbContext>(options=>
 options.UseSqlServer(connectionString));
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 
 builder.Services.AddControllers();

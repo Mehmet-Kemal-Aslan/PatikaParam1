@@ -1,4 +1,5 @@
-﻿using StudentWebApi.Models;
+﻿using AutoMapper;
+using StudentWebApi.Models;
 
 namespace StudentWebApi.Operations.CreateStudents
 {
@@ -6,9 +7,11 @@ namespace StudentWebApi.Operations.CreateStudents
     {
         public CreateStudentModel Model { get; set; }
         private readonly StudentDbContext _dbContext;
-        public CreateStudentsCommand(StudentDbContext dbContext)
+        private readonly IMapper _mapper;
+        public CreateStudentsCommand(StudentDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         // An Handler to create new student
@@ -17,11 +20,7 @@ namespace StudentWebApi.Operations.CreateStudents
             var student = _dbContext.Students.SingleOrDefault(student => student.Name == Model.Name);
             if (student != null)
                 throw new InvalidOperationException("Aynı öğrenci ikinci kez kaydedilemez!");
-            student = new Student();
-            student.Name = Model.Name;
-            student.Surname = Model.Surname;
-            student.Grade = Model.Grade;
-            student.Note = Model.Note;
+            student = _mapper.Map<Student>(Model);
             _dbContext.Students.Add(student);
             _dbContext.SaveChanges();
         }

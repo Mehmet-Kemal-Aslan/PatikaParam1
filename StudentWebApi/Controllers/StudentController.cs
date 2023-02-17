@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -45,10 +46,12 @@ namespace StudentWebApi.Controllers
         };
 
         private readonly StudentDbContext _context;
+        private readonly IMapper _mapper;
 
-        public StudentController(StudentDbContext context)
+        public StudentController(StudentDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // Gets all records
@@ -84,21 +87,11 @@ namespace StudentWebApi.Controllers
         [HttpPost]
         public IActionResult AddStudent([FromBody] CreateStudentModel newStudent)
         {
-            CreateStudentsCommand command = new CreateStudentsCommand(_context);
+            CreateStudentsCommand command = new CreateStudentsCommand(_context, _mapper);
             try
             {
                 command.Model = newStudent;
-                CreateStudentCommandValidator validator = new CreateStudentCommandValidator();
-                ValidationResult result = validator.Validate(command);
-                validator.ValidateAndThrow(command);
                 command.Handle();
-                //if(!result.IsValid)
-                //    foreach(var item in result.Errors)
-                //    {
-                //        Console.WriteLine("Özellik " + item.PropertyName + " Hata mesajı " + item.ErrorMessage);
-                //    }
-                //else
-                //    command.Handle();
             }
             catch (Exception ex)
             {

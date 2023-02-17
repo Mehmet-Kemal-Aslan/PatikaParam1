@@ -11,8 +11,8 @@ using StudentWebApi.Models;
 namespace StudentWebApi.Migrations
 {
     [DbContext(typeof(StudentDbContext))]
-    [Migration("20230215154049_first")]
-    partial class first
+    [Migration("20230216202529_second")]
+    partial class second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
