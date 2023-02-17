@@ -58,7 +58,7 @@ namespace StudentWebApi.Controllers
         [HttpGet]
         public IActionResult GetStundentList()
         {
-            GetStudentsQuery query = new GetStudentsQuery(_context);
+            GetStudentsQuery query = new GetStudentsQuery(_context, _mapper);
             var result = query.Handle();
             return Ok(result);
         }
@@ -70,10 +70,8 @@ namespace StudentWebApi.Controllers
             StudentDetailViewModel result;
             try
             {
-                GetStudentDetailQuery query = new GetStudentDetailQuery(_context);
+                GetStudentDetailQuery query = new GetStudentDetailQuery(_context, _mapper);
                 query.StudentId = id;
-                GetStudentDetailQueryValidator validator = new GetStudentDetailQueryValidator();
-                validator.ValidateAndThrow(query);
                 result = query.Handle();
             }
             catch (Exception ex)
@@ -110,7 +108,6 @@ namespace StudentWebApi.Controllers
                 command.StudentId = id;
                 command.Model = updatedStudent;
                 UpdateStudentCommandValidator validator = new UpdateStudentCommandValidator();
-                ValidationResult result = validator.Validate(command);
                 validator.ValidateAndThrow(command);
                 command.Handle();
             }

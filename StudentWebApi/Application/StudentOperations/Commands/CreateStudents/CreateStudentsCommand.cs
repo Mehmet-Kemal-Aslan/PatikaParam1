@@ -31,6 +31,7 @@ namespace StudentWebApi.Operations.CreateStudents
             public string Surname { get; set; }
             public int Grade { get; set; }
             public string Note { get; set; }
+            public int ProjectId { get; set; }
         }
     }
 }

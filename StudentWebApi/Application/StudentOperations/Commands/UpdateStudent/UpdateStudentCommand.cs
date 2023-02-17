@@ -15,23 +15,22 @@ namespace StudentWebApi.Operations.UpdateStudent
         }
 
         // An handler to update a student's grade and note.
-        public StudentUpdateViewModel Handle()
+        public void Handle()
         {
-            var student = _dbContext.Students.Where(student => student.Id == StudentId).SingleOrDefault();
+            var student = _dbContext.Students.SingleOrDefault(student => student.Id == StudentId);
             if (student == null)
                 throw new InvalidOperationException("Güncellenecek öğrenci bulunamadı.");
-            StudentUpdateViewModel vm = new StudentUpdateViewModel();
-            student.Grade = Convert.ToInt32(Model.Grade);
+            student.ProjectId = Model.ProjectId != default ? Model.ProjectId : student.ProjectId;
+            student.Grade = Model.Grade != default ? Model.Grade : student.Grade;
             student.Note = Model.Note != default ? Model.Note : student.Note;
             _dbContext.SaveChanges();
-
-            return vm;
         }
 
         public class StudentUpdateViewModel
         {
             public int Grade { get; set; }
             public string Note { get; set; }
+            public int ProjectId { get; set; }
         }
     }
 }
