@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using StudentWebApi.Models;
+﻿using StudentWebApi.Models;
 
 namespace StudentWebApi.Operations.DeleteStudent
 {
@@ -20,14 +18,6 @@ namespace StudentWebApi.Operations.DeleteStudent
                 throw new InvalidOperationException("Silinecek öğrenci bulunamadı.");
             _dbContext.Students.Remove(student);
             _dbContext.SaveChanges();
-        }
-
-        public class DeleteStudentViewModel
-        {
-            public string Name { get; set; }
-            public string Surname { get; set; }
-            public int Grade { get; set; }
-            public string Note { get; set; }
         }
     }
 }

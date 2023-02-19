@@ -7,6 +7,7 @@ namespace StudentWebApi.Models
     {
         [Key]
         public int ProjectId { get; set; }
+        [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
         public bool IsActive { get; set; } = true;
     }

@@ -8,5 +8,6 @@ namespace StudentWebApi.Models
             : base(options) { }
         public DbSet<Student> Students { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Mentor> Mentors { get; set; }
     }
 }

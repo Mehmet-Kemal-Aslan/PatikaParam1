@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using StudentWebApi.Models;
+﻿using StudentWebApi.Models;
 
 namespace StudentWebApi.Operations.UpdateStudent
 {
