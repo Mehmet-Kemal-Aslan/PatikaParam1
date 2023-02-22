@@ -5,6 +5,7 @@ using StudentWebApi.Services;
 using AutoMapper;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ var connectionString = builder.Configuration.GetConnectionString("DbStudent");
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<StudentDbContext>(options=>
 options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IStudentDbContext>(provider => provider.GetService<StudentDbContext>());
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

@@ -5,9 +5,9 @@ namespace StudentWebApi.Application.ProjectOperations.Commands.CreateProject
     public class CreateProjectCommand
     {
         public CreateProjectViewModel Model { get; set; }
-        private readonly StudentDbContext _context;
+        private readonly IStudentDbContext _context;
 
-        public CreateProjectCommand(StudentDbContext context)
+        public CreateProjectCommand(IStudentDbContext context)
         {
             _context = context;
         }

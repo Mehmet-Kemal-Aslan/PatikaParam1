@@ -4,10 +4,10 @@ namespace StudentWebApi.Application.ProjectOperations.Commands.UpdateProject
 {
     public class UpdateProjectCommand
     {
-        private readonly StudentDbContext _context;
+        private readonly IStudentDbContext _context;
         public int Id { get; set; }
         public UpdateProjectViewModel Model { get; set; }
-        public UpdateProjectCommand(StudentDbContext context)
+        public UpdateProjectCommand(IStudentDbContext context)
         {
             _context = context;
         }

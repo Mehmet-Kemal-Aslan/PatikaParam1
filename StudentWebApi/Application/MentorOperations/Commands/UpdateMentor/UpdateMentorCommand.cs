@@ -4,10 +4,10 @@ namespace StudentWebApi.Application.MentorOperations.Commands.UpdateMentor
 {
     public class UpdateMentorCommand
     {
-        private readonly StudentDbContext _dbContext;
+        private readonly IStudentDbContext _dbContext;
         public int Id { get; set; }
         public UpdateMentorViewModel Model { get; set; }
-        public UpdateMentorCommand(StudentDbContext dbContext)
+        public UpdateMentorCommand(IStudentDbContext dbContext)
         {
             _dbContext = dbContext;
         }

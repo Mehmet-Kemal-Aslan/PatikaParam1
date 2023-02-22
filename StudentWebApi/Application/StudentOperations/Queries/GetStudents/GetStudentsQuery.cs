@@ -8,9 +8,9 @@ namespace StudentWebApi.Operations
 {
     public class GetStudentsQuery
     {
-        private readonly StudentDbContext _dbContext;
+        private readonly IStudentDbContext _dbContext;
         private readonly IMapper _mapper;
-        public GetStudentsQuery(StudentDbContext dbContext, IMapper mapper)
+        public GetStudentsQuery(IStudentDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

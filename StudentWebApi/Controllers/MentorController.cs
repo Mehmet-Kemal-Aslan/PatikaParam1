@@ -17,10 +17,10 @@ namespace StudentWebApi.Controllers
     [ApiController]
     public class MentorController : ControllerBase
     {
-        private readonly StudentDbContext _context;
+        private readonly IStudentDbContext _context;
         private readonly IMapper _mapper;
 
-        public MentorController(StudentDbContext context, IMapper mapper)
+        public MentorController(IStudentDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

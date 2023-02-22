@@ -4,9 +4,9 @@ namespace StudentWebApi.Application.MentorOperations.Commands.DeleteMentor
 {
     public class DeleteMentorCommand
     {
-        private readonly StudentDbContext _dbContext;
+        private readonly IStudentDbContext _dbContext;
         public int Id { get; set; }
-        public DeleteMentorCommand(StudentDbContext dbContext)
+        public DeleteMentorCommand(IStudentDbContext dbContext)
         {
             _dbContext = dbContext;
         }

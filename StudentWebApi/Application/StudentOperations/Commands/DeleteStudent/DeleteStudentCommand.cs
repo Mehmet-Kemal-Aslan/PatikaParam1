@@ -4,9 +4,9 @@ namespace StudentWebApi.Operations.DeleteStudent
 {
     public class DeleteStudentCommand
     {
-        private readonly StudentDbContext _dbContext;
+        private readonly IStudentDbContext _dbContext;
         public int StudentId { get; set; }
-        public DeleteStudentCommand(StudentDbContext dbContext)
+        public DeleteStudentCommand(IStudentDbContext dbContext)
         {
             _dbContext = dbContext;
         }

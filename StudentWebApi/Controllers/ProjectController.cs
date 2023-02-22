@@ -15,10 +15,10 @@ namespace StudentWebApi.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private readonly StudentDbContext _context;
+        private readonly IStudentDbContext _context;
         private readonly IMapper _mapper;
 
-        public ProjectController(StudentDbContext context, IMapper mapper)
+        public ProjectController(IStudentDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

@@ -6,10 +6,10 @@ namespace StudentWebApi.Application.MentorOperations.Commands.CreateMentor
     public class CreateMentorCommand
     {
         public CreateMentorViewModel Model { get; set; }
-        private readonly StudentDbContext _dbContext;
+        private readonly IStudentDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public CreateMentorCommand(StudentDbContext dbContext, IMapper mapper)
+        public CreateMentorCommand(IStudentDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

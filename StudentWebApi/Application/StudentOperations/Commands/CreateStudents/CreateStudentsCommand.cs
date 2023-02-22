@@ -6,9 +6,9 @@ namespace StudentWebApi.Operations.CreateStudents
     public class CreateStudentsCommand
     {
         public CreateStudentModel Model { get; set; }
-        private readonly StudentDbContext _dbContext;
+        private readonly IStudentDbContext _dbContext;
         private readonly IMapper _mapper;
-        public CreateStudentsCommand(StudentDbContext dbContext, IMapper mapper)
+        public CreateStudentsCommand(IStudentDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

@@ -4,10 +4,10 @@ namespace StudentWebApi.Operations.UpdateStudent
 {
     public class UpdateStudentCommand
     {
-        private readonly StudentDbContext _dbContext;
+        private readonly IStudentDbContext _dbContext;
         public int StudentId { get; set; }
         public StudentUpdateViewModel Model { get; set; }
-        public UpdateStudentCommand(StudentDbContext dbContext)
+        public UpdateStudentCommand(IStudentDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -45,10 +45,10 @@ namespace StudentWebApi.Controllers
             }
         };
 
-        private readonly StudentDbContext _context;
+        private readonly IStudentDbContext _context;
         private readonly IMapper _mapper;
 
-        public StudentController(StudentDbContext context, IMapper mapper)
+        public StudentController(IStudentDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

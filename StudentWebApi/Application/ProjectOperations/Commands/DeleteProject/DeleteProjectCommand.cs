@@ -4,9 +4,9 @@ namespace StudentWebApi.Application.ProjectOperations.Commands.DeleteProject
 {
     public class DeleteProjectCommand
     {
-        private readonly StudentDbContext _context;
+        private readonly IStudentDbContext _context;
         public int Id { get; set; }
-        public DeleteProjectCommand(StudentDbContext context)
+        public DeleteProjectCommand(IStudentDbContext context)
         {
             _context = context;
         }

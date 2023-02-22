@@ -6,10 +6,10 @@ namespace StudentWebApi.Application.MentorOperations.Queries.GetMentorDetail
 {
     public class GetMentorDetailQuery
     {
-        private readonly StudentDbContext _dbContext;
+        private readonly IStudentDbContext _dbContext;
         private readonly IMapper _mapper;
         public int Id { get; set; }
-        public GetMentorDetailQuery(StudentDbContext dbContext, IMapper mapper)
+        public GetMentorDetailQuery(IStudentDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

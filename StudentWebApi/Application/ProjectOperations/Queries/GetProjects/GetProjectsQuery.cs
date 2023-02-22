@@ -5,10 +5,10 @@ namespace StudentWebApi.Application.ProjectOperations.Queries
 {
     public class GetProjectsQuery
     {
-        public readonly StudentDbContext _context;
+        public readonly IStudentDbContext _context;
         public readonly IMapper _mapper;
 
-        public GetProjectsQuery(StudentDbContext context, IMapper mapper)
+        public GetProjectsQuery(IStudentDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
