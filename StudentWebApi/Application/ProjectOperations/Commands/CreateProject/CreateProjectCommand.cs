@@ -16,7 +16,7 @@ namespace StudentWebApi.Application.ProjectOperations.Commands.CreateProject
         {
             var project = _context.Projects.SingleOrDefault(x => x.Name == Model.ProjectName);
             if (project != null)
-                throw new InvalidOperationException("Aynı proje ikinci kez kaydedilemez!");
+                throw new InvalidOperationException("Proje zaten mevcut.");
             project = new Project();
             project.Name = Model.ProjectName;
             _context.Projects.Add(project);
