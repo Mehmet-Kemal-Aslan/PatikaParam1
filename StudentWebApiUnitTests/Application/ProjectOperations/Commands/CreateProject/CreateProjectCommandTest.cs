@@ -38,5 +38,23 @@ namespace StudentWebApiUnitTests.Application.ProjectOperations.Commands.CreatePr
                 .Invoking(() => command.Handle())
                 .Should().Throw<InvalidOperationException>().And.Message.Should().Be("Proje zaten mevcut.");
         }
+
+        [Fact]
+        public void WhenValidInputsAreGiven_Project_ShouldBeCreated()
+        {
+            //arrange
+            CreateProjectCommand command = new CreateProjectCommand(_context);
+            CreateProjectViewModel model = new CreateProjectViewModel() { ProjectName = "ProjeTest" };
+            command.Model = model;
+
+            //Act
+            FluentActions.Invoking(() => command.Handle()).Invoke();
+
+            //Assert
+            var project = _context.Projects.SingleOrDefault(project => project.Name == model.ProjectName);
+            project.Should().NotBeNull();
+            project.Name.Should().Be(model.ProjectName);
+
+        }
     }
 }

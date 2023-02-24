@@ -6,7 +6,7 @@ namespace StudentWebApi.Application.ProjectOperations.Commands.UpdateProject
     {
         public UpdateProjectCommandValidator()
         {
-            RuleFor(command => command.Model.Name).MinimumLength(3).When(x => x.Model.Name.Trim() != String.Empty);
+            RuleFor(command => command.Model.Name).NotEmpty().MinimumLength(3);//.When(x => x.Model.Name.Trim() != String.Empty);
         }
     }
 }

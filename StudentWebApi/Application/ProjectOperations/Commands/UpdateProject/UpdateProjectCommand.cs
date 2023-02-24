@@ -18,7 +18,7 @@ namespace StudentWebApi.Application.ProjectOperations.Commands.UpdateProject
             if (project == null)
                 throw new InvalidOperationException("Güncellenecek proje bulunamadı.");
 
-            if (_context.Projects.Any(x => x.Name.ToLower() == Model.Name.ToLower() && x.ProjectId == Id))
+            if (_context.Projects.Any(x => x.Name.ToLower() == Model.Name.ToLower())) //&& x.ProjectId == Id))
                 throw new InvalidOperationException("Aynı isimli bir proje zaten mevcut.");
 
             project.Name = String.IsNullOrEmpty(Model.Name.Trim()) ? project.Name : Model.Name;

@@ -34,7 +34,7 @@ namespace StudentWebApiUnitTests.Application.ProjectOperations.Commands.CreatePr
 
         [Theory]
         [InlineData("Rastgele")]
-        public void WhenInvalidInputsAreGiven_Validator_ShouldNotBeReturnedErrors(string ProjectName)
+        public void WhenValidInputsAreGiven_Validator_ShouldNotBeReturnedErrors(string ProjectName)
         {
             //arrange
             CreateProjectCommand command = new CreateProjectCommand(null);
