@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentWebApi.Application.MentorOperations.Commands.CreateMentor;
 using StudentWebApi.Application.MentorOperations.Commands.DeleteMentor;
@@ -13,6 +14,7 @@ using StudentWebApi.Models;
 
 namespace StudentWebApi.Controllers
 {
+    [Authorize]
     [Route("[controller]s")]
     [ApiController]
     public class MentorController : ControllerBase

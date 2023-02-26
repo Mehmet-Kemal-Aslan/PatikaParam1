@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentWebApi.Models;
@@ -15,6 +16,7 @@ using static StudentWebApi.Operations.UpdateStudent.UpdateStudentCommand;
 
 namespace StudentWebApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]s")]
     [ApiController]
     public class StudentController : ControllerBase

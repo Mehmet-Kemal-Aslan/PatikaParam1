@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentWebApi.Application.ProjectOperations.Commands.CreateProject;
 using StudentWebApi.Application.ProjectOperations.Commands.DeleteProject;
@@ -11,6 +12,7 @@ using static StudentWebApi.Application.ProjectOperations.Commands.UpdateProject.
 
 namespace StudentWebApi.Controllers
 {
+    [Authorize]
     [Route("[controller]s")]
     [ApiController]
     public class ProjectController : ControllerBase
