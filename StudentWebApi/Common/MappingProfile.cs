@@ -5,6 +5,7 @@ using StudentWebApi.Application.MentorOperations.Queries.GetMentors;
 using StudentWebApi.Application.ProjectOperations.Queries;
 using StudentWebApi.Models;
 using static StudentWebApi.Application.ProjectOperations.Queries.GetProjectDetailQuery;
+using static StudentWebApi.Application.UserOperations.Commands.CreateUserCommand.CreateUserCommand;
 using static StudentWebApi.Operations.CreateStudents.CreateStudentsCommand;
 using static StudentWebApi.Operations.GetStudentDetail.GetStudentDetailQuery;
 using static StudentWebApi.Operations.GetStudentsQuery;
@@ -25,6 +26,8 @@ namespace StudentWebApi.Common
             CreateMap<CreateMentorViewModel, Mentor>();
             CreateMap<Mentor, MentorViewModel>().ForMember(dest => dest.Project, opt => opt.MapFrom(src => src.Project.Name));
             CreateMap<Mentor, MentorDetailViewModel>().ForMember(dest => dest.Project, opt => opt.MapFrom(src => src.Project.Name));
+
+            CreateMap<CreateUserModel, User>();
         }
     }
 }
